@@ -312,6 +312,8 @@ export const oidcConfigServiceFactory = ({
             tx
           );
           isNewUser = true;
+        } else if (!newUser.firstName && firstName) {
+          newUser = await userDAL.updateById(newUser.id, { firstName, lastName }, tx);
         }
 
         userAlias = await userAliasDAL.create(
